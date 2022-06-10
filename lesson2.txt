@@ -1,12 +1,29 @@
 #Student: Avakian Andranik
 
-1) Какие у вас ожидания от курса? Есть ли конкретные вопросы по теме Базы данных?
-Я ожидаю получить максимально возможные практические навыки в отведенное для данного курса время. Надеюсь будет много практики.
+Задание 1
+aar@localhost ~/Programming/GB/mysqlGB (lesson2) $ systemctl status mysql
+● mariadb.service - MariaDB database server
+     Loaded: loaded (/usr/lib/systemd/system/mariadb.service; enabled; vendor preset: disabled)
+     Active: active (running) since Fri 2022-05-27 10:25:19 MSK; 2 weeks 0 days ago
+       Docs: man:mysqld(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 1713 ExecStartPre=/usr/libexec/mysql/mysql-systemd-helper install (code=exited, status=0/SUCCESS)
+    Process: 1719 ExecStartPre=/usr/libexec/mysql/mysql-systemd-helper upgrade (code=exited, status=0/SUCCESS)
+   Main PID: 1725 (mysqld)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 4915)
+        CPU: 2min 20.110s
+     CGroup: /system.slice/mariadb.service
+             └─ 1725 /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql
 
-2) В какой сфере работаете сейчас?
-Сфера финансов
+Warning: some journal files were not opened due to insufficient permissions.
+aar@localhost ~/Programming/GB/mysqlGB (lesson2) $ 
+------------------------------------------------------------------------------------------------------------------------------
 
-3) Если в IT, то какой у вас опыт (инструменты, технологии, языки программирования)?
-Есть некоторые навыки в IT: Linux на уверенном уровне, работа в cli, сборка дистрибутива из исходников; vim, Python, C.
+Задание 2
 
-P.S. В комментариях не хочу писать. Так удобнее и для вас и для меня.
+------------------------------------------------------------------------------------------------------------------------------
+Задание 3
+
+------------------------------------------------------------------------------------------------------------------------------
+Задание 4
