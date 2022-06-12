@@ -1,0 +1,292 @@
+#Student: Avakian Andranik
+
+Задание 1
+aar@localhost ~/Programming/GB/mysqlGB (lesson2) $ systemctl status mysql
+● mariadb.service - MariaDB database server
+     Loaded: loaded (/usr/lib/systemd/system/mariadb.service; enabled; vendor preset: disabled)
+     Active: active (running) since Fri 2022-05-27 10:25:19 MSK; 2 weeks 0 days ago
+       Docs: man:mysqld(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 1713 ExecStartPre=/usr/libexec/mysql/mysql-systemd-helper install (code=exited, status=0/SUCCESS)
+    Process: 1719 ExecStartPre=/usr/libexec/mysql/mysql-systemd-helper upgrade (code=exited, status=0/SUCCESS)
+   Main PID: 1725 (mysqld)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 4915)
+        CPU: 2min 20.110s
+     CGroup: /system.slice/mariadb.service
+             └─ 1725 /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql
+
+Warning: some journal files were not opened due to insufficient permissions.
+aar@localhost ~/Programming/GB/mysqlGB (lesson2) $ 
+------------------------------------------------------------------------------------------------------------------------------
+
+Задание 2
+MariaDB [(none)]> CREATE DATABASE example;
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| billing_simple     |
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
+| test               |
++--------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [(none)]> 
+MariaDB [(none)]> USE example;
+Database changed
+MariaDB [example]> 
+MariaDB [example]> CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30));
+Query OK, 0 rows affected (0.489 sec)
+MariaDB [example]> SHOW TABLES FROM example;
++-------------------+
+| Tables_in_example |
++-------------------+
+| users             |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [example]> 
+MariaDB [example]> DESCRIBE users;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(30) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.001 sec)
+
+------------------------------------------------------------------------------------------------------------------------------
+Задание 3
+
+MariaDB [example]> \q
+Bye
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ mysqldump -u root -p example
+Enter password: 
+-- MariaDB dump 10.19  Distrib 10.7.3-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: example
+-- ------------------------------------------------------
+-- Server version	10.7.3-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-06-12 15:14:25
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ 
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ mysqldump -u root -p example > sample
+Enter password: 
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ ll
+total 28K
+-rw-r--r-- 1 aar users 1.5K Jun 10 15:15 lesson2.txt
+-rw-r--r-- 1 aar users    9 Jun  4 20:56 README.md
+-rw-r--r-- 1 aar users 1.9K Jun 12 15:17 sample
+
+------------------------------------------------------------------------------------------------------------------------------
+Задание 4
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| billing_simple     |
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
+| test               |
++--------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [(none)]> USE mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [mysql]> SHOW TABLES FROM mysql;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| column_stats              |
+| columns_priv              |
+| db                        |
+| event                     |
+| func                      |
+| general_log               |
+| global_priv               |
+| gtid_slave_pos            |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| index_stats               |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| roles_mapping             |
+| servers                   |
+| slow_log                  |
+| table_stats               |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| transaction_registry      |
+| user                      |
++---------------------------+
+31 rows in set (0.001 sec)
+
+MariaDB [mysql]> 
+MariaDB [mysql]> SELECT * FROM help_keyword;
++-----------------+------------------------+
+| help_keyword_id | name                   |
++-----------------+------------------------+
+|               1 | master_ssl_verify_cert |
+|               2 | drop prepare           |
+|               3 | work                   |
+|               4 | drop                   |
+|               5 | returns                |
+|               6 | value                  |
+|               7 | nchar                  |
+|               8 | repeat                 |
+|               9 | columns                |
+|              10 | sql_big_result         |
+|              11 | escape                 |
+|              12 | mode                   |
+|              13 | schedule               |
+|              14 | starts                 |
+|              15 | host                   |
+|              16 | row_format             |
++-----------------+------------------------+
+16 rows in set (0.000 sec)
+
+MariaDB [mysql]> 
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ mysqldump -u root -p mysql help_keyword --where='help_keyword_id<100' > help_keyword_dump 
+Enter password: 
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ cat help_keyword_dump 
+-- MariaDB dump 10.19  Distrib 10.7.3-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: mysql
+-- ------------------------------------------------------
+-- Server version	10.7.3-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `help_keyword`
+--
+
+DROP TABLE IF EXISTS `help_keyword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `help_keyword` (
+  `help_keyword_id` int(10) unsigned NOT NULL,
+  `name` char(64) NOT NULL,
+  PRIMARY KEY (`help_keyword_id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=Aria DEFAULT CHARSET=utf8mb3 PAGE_CHECKSUM=1 TRANSACTIONAL=0 COMMENT='help keywords';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `help_keyword`
+--
+-- WHERE:  help_keyword_id<100
+
+LOCK TABLES `help_keyword` WRITE;
+/*!40000 ALTER TABLE `help_keyword` DISABLE KEYS */;
+INSERT INTO `help_keyword` VALUES
+(1,'master_ssl_verify_cert'),
+(2,'drop prepare'),
+(3,'work'),
+(4,'drop'),
+(5,'returns'),
+(6,'value'),
+(7,'nchar'),
+(8,'repeat'),
+(9,'columns'),
+(10,'sql_big_result'),
+(11,'escape'),
+(12,'mode'),
+(13,'schedule'),
+(14,'starts'),
+(15,'host'),
+(16,'row_format');
+/*!40000 ALTER TABLE `help_keyword` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-06-12 20:37:23
+aar@localhost ~/Programming/GB/mysqlGB (lesson2*?) $ 
+
+
